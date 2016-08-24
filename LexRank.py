@@ -53,6 +53,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Pass the data fname and threshold value")
     parser.add_argument("fname", help="Provide the data file name")
     parser.add_argument("threshold", help="Provide the threshold value", default=0.15, type=float)
+    parser.add_argument("N", help="Top N sentences to be picked", default=10, type=int)
     args = parser.parse_args()
     with open(args.fname, "r") as f:
         data = f.read()
@@ -64,4 +65,4 @@ if __name__ == "__main__":
     print ("Printing similarity matrix:\n", matrix)
     gr = build_graph(sent_tokens, args.threshold, idf)
     keysentences = get_keysentences(gr)
-    print ("Printing Top 10 Key sentences:\n",keysentences[:10])
+    print ("Printing Top 10 Key sentences:\n",keysentences[:args.N])
